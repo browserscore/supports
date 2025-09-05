@@ -1,0 +1,30 @@
+{
+  "name": "@browserscore/supports",
+  "version": "0.0.1",
+  "description": "Generic feature detection library for web platform features",
+  "keywords": [
+    "feature-detection",
+    "browser-support"
+  ],
+  "homepage": "https://github.com/browserscore/supports#readme",
+  "bugs": {
+    "url": "https://github.com/browserscore/supports/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/browserscore/supports.git"
+  },
+  "license": "MIT",
+  "author": "Lea Verou",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./css": "./src/types/css/index.js",
+    "./js": "./src/types/js/index.js",
+    "./html": "./src/types/html/index.js"
+  }
+}
