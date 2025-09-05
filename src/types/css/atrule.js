@@ -1,4 +1,5 @@
-import { prefixes, styleElement } from './shared.js';
+import { styleElement } from '../../shared.js';
+import { prefixes } from '../../data.js';
 
 let cached = {};
 let instances = {};

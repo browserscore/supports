@@ -1,5 +1,5 @@
-import { styleElement } from './shared.js';
-import { camelCase } from './util.js';
+import { styleElement } from '../../shared.js';
+import { camelCase } from '../../util.js';
 
 import isDescriptorSupported from './descriptor.js';
 import {isSupported as isValueSupported} from './value.js';

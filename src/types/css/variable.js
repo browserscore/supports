@@ -1,4 +1,4 @@
-import { dummy, inlineStyle } from './shared.js';
+import { dummy, inlineStyle } from '../../shared.js';
 
 export default function variable (name, value) {
 	inlineStyle.setProperty(name, value);

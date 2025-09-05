@@ -1,4 +1,5 @@
-import { domPrefixes as prefixes, prefixCamelCase as prefixName } from './shared.js';
+import { domPrefixes as prefixes } from '../../data.js';
+import { prefixCamelCase as prefixName } from '../../util.js';
 
 import supportsGlobal from './global.js';
 

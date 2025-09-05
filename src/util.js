@@ -13,3 +13,12 @@ export function toArray (value) {
 
 	return Array.isArray(value) ? value : [value];
 }
+
+export function prefixCamelCase (prefix, name) {
+	if (!prefix) {
+		return name;
+	}
+
+	let capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+	return prefix + capitalizedName;
+}

@@ -1,4 +1,5 @@
-import { prefixes, inlineStyle } from './shared.js';
+import { inlineStyle } from '../../shared.js';
+import { prefixes } from '../../data.js';
 
 import supportsProperty from './property.js';
 

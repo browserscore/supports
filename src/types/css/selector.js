@@ -1,4 +1,4 @@
-import { prefixes } from './shared.js';
+import { prefixes } from '../../data.js';
 
 let cached = {};
 

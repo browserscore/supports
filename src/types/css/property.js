@@ -1,5 +1,6 @@
-import { prefixes, inlineStyle } from './shared.js';
-import { camelCase } from './util.js';
+import { inlineStyle } from '../../shared.js';
+import { prefixes } from '../../data.js';
+import { camelCase } from '../../util.js';
 
 let cached = {};
 
