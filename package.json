@@ -26,5 +26,10 @@
     "./css": "./src/types/css/index.js",
     "./js": "./src/types/js/index.js",
     "./html": "./src/types/html/index.js"
+  },
+  "devDependencies": {
+    "prettier-plugin-brace-style": "latest",
+    "prettier-plugin-merge": "latest",
+    "prettier-plugin-space-before-function-paren": "latest"
   }
 }
