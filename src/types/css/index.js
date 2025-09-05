@@ -5,4 +5,3 @@ export { default as descriptorValue } from './descriptor-value.js';
 export { default as selector } from './selector.js';
 export { default as atrule } from './atrule.js';
 export { default as mq } from './mq.js';
-export { default as variable } from './variable.js';
