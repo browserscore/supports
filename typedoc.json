@@ -1,0 +1,21 @@
+{
+	"out": "./api",
+	"json": "./api/docs.json",
+	"name": "Supports API",
+	"entryPoints": ["src/index.js", "src/shared.js", "src/util.js"],
+	"plugin": ["typedoc-plugin-rename-defaults"],
+	"entryPointStrategy": "expand",
+	"excludeExternals": true,
+	"includeVersion": true,
+	"markdownItOptions": {
+		"html": true,
+		"linkify": true,
+		"typographer": true
+	},
+	"navigationLinks": {
+		"Home": "https://supports.browserscore.dev",
+		"GitHub": "https://github.com/browserscore/supports"
+	},
+	"favicon": "https://browserscore.dev/ui/logo.svg",
+	"hostedBaseUrl": "https://supports.browserscore.dev/api"
+}

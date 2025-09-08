@@ -1,3 +1,3 @@
-css/* src/types/:splat 200
-html/* src/types/html/:splat 200
-js/* src/types/js/:splat 200
+/css/* /src/types/css/:splat 200
+/html/* /src/types/html/:splat 200
+/js/* /src/types/js/:splat 200
