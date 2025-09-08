@@ -35,7 +35,7 @@ function getValue (name, rule) {
 }
 
 /**
- * No caching, no prefixes. Fails early if the descriptor or @rule are not supported at all.
+ * No caching, no prefixes. Fails early if the descriptor or `@rule` are not supported at all.
  * @param {string} name
  * @param {string} value
  * @param {string} atrule
