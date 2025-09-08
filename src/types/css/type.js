@@ -6,7 +6,7 @@ import supportsValue from './value.js';
 export const dataTypes = {
 	length: { property: 'width', sampleValue: '0px' },
 	time: { property: 'transition-duration', sampleValue: '0s' },
-	angle: { property: { name: 'transform', value: v => `rotate(${v})` } },
+	angle: { property: { name: 'transform', value: v => `rotate(${v})` }, sampleValue: '0deg' },
 	integer: { property: 'z-index', sampleValue: '0' },
 	number: { property: 'line-height', sampleValue: '0' },
 	percentage: { property: 'width', sampleValue: '0%' },
