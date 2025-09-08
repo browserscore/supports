@@ -28,7 +28,7 @@ export const dataTypes = {
  * @returns
  */
 export default function  (value, type) {
-	let property = typeProperties[type]?.property;
+	let property = dataTypes[type]?.property;
 
 	if (!property) {
 		return { success: undefined, note: `Unknown type: ${type}` };
@@ -36,7 +36,7 @@ export default function  (value, type) {
 
 	if (typeof property === 'object') {
 		value = property.value(value);
-		property = property.property;
+		property = property.name;
 	}
 
 	return supportsValue(property, value);
