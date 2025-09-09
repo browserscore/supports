@@ -1,22 +1,33 @@
+import supportsRule, { prefixRule } from './rule.js';
 import { prefixes } from '../../data.js';
 
 let cached = {};
 
+const CAN_USE_CSS_SUPPORTS = 'CSS' in globalThis && CSS.supports && CSS.supports('selector(p)');
+
 export default function selector (selector) {
-	if (cached[selector]) {
-		return {
-			success: cached[selector],
-		};
+	if (!CAN_USE_CSS_SUPPORTS) {
+		return supportsRule(selector);
 	}
 
-	for (let i = 0; i < prefixes.length; i++) {
-		let resolved = selector.replace(/^(:+)/, '$1' + prefixes[i]);
+	let cachedResult = cached[selector];
+	let success, prefix;
+
+	if (cachedResult !== undefined) {
+		success = Boolean(cachedResult);
+		prefix = typeof cachedResult === "boolean" ? '' : cachedResult;
+
+		return { success, prefix };
+	}
+
+	for (let prefix of prefixes) {
+		let resolved = prefixRule(selector, prefix);
 
 		if (CSS.supports('selector(' + resolved + ')')) {
-			cached[selector] = true;
+			cached[selector] = prefix === '' ? true : (prefix ?? false);
 			return {
 				success: true,
-				prefix: prefixes[i],
+				prefix,
 			};
 		}
 	}

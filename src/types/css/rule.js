@@ -112,6 +112,6 @@ export default function supportsRule (rule, {parent: parentRule, contentBefore} 
 	return {success, prefix, instance: instances[rule], resolved: success ? resolved : rule};
 }
 
-function prefixRule (rule, prefix = '') {
+export function prefixRule (rule, prefix = '') {
 	return rule.replace(/^[@:]*/, '$&' + prefix);
 }
