@@ -1,5 +1,5 @@
 import { isSupported as isPropertySupported } from './property.js';
-import supportsAtrule from './atrule.js';
+import supportsRule from './rule.js';
 
 let cached = {};
 
@@ -20,7 +20,7 @@ export default function (name, atrule) {
 		throw new Error(`At-rule is required for descriptor ${name}`);
 	}
 
-	let atruleSupported = supportsAtrule(atrule);
+	let atruleSupported = supportsRule(atrule);
 
 	if (!atruleSupported.instance) {
 		return {success: false, atrule: atruleSupported};

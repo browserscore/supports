@@ -3,6 +3,7 @@ export { default as cssValue } from './value.js';
 export { default as cssDescriptor } from './descriptor.js';
 export { default as cssDescriptorValue } from './descriptor-value.js';
 export { default as cssSelector } from './selector.js';
+export { default as cssRule } from './rule.js';
 export { default as cssAtrule } from './atrule.js';
 export { default as mediaQuery } from './mq.js';
 export { default as cssType } from './type.js';
