@@ -5,11 +5,13 @@ import supportsValue from './value.js';
  */
 export const dataTypes = {
 	length: { property: 'width', sampleValue: '0px' },
+	percentage: { property: 'width', sampleValue: '0%' },
+	'length-percentage': { property: 'width', sampleValue: 'calc(1px + 1%)' },
 	time: { property: 'transition-duration', sampleValue: '0s' },
 	angle: { property: { name: 'transform', value: v => `rotate(${v})` }, sampleValue: '0deg' },
 	integer: { property: 'z-index', sampleValue: '0' },
 	number: { property: 'line-height', sampleValue: '0' },
-	percentage: { property: 'width', sampleValue: '0%' },
+
 	image: {
 		property: 'background-image',
 		sampleValue:
