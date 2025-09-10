@@ -1,4 +1,4 @@
-export default function mq (mq) {
+export default function mediaQuery (mq) {
 	return {
 		// We check whether the query does not include 'not all' because
 		// if it does, that means the query is ignored.
