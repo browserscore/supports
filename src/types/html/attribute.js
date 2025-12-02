@@ -1,10 +1,32 @@
-import { dummy } from '../../shared.js';
 import { camelCase } from '../../util.js';
 
 let elementInterfaces = {};
 
+/**
+ * Irregular cases that can't be determined by `camelCase()`
+ */
+export const irregularAttributes = {
+	contenteditable: 'contentEditable',
+	readonly: 'readOnly',
+	for: 'htmlFor',
+	class: 'className',
+	tabindex: 'tabIndex',
+	maxlength: 'maxLength',
+	minlength: 'minLength',
+	colspan: 'colSpan',
+	rowspan: 'rowSpan',
+	usemap: 'useMap',
+	ismap: 'isMap',
+	datetime: 'dateTime',
+	autocapitalize: 'autoCapitalize',
+	autofocus: 'autoFocus',
+	autoplay: 'autoPlay',
+	playsinline: 'playsInline',
+	crossorigin: 'crossOrigin',
+};
+
 export function getElementInterface (elementType) {
-	if (!elementType || elementType.includes("-")) {
+	if (!elementType || elementType.includes('-')) {
 		return HTMLElement;
 	}
 
@@ -29,25 +51,23 @@ export function getElementInterface (elementType) {
 }
 
 export function getAttributeJsName (attributeName) {
-	// Irregular cases that can't be determined by camelCase()
-	switch (attributeName) {
-		case 'contenteditable':
-			return 'contentEditable';
-		case 'readonly':
-			return 'readOnly';
-		case 'for':
-			return 'htmlFor';
-	}
-
-	return camelCase(attributeName);
+	return irregularAttributes[attributeName] ?? camelCase(attributeName);
 }
 
-export default function attribute (name, {jsName = camelCase(name), elementType = '_', elementInterface = getElementInterface(elementType)} = {}) {
+export default function attribute (
+	name,
+	{
+		jsName = getAttributeJsName(name),
+		elementType = '_',
+		elementInterface = getElementInterface(elementType),
+	} = {},
+) {
 	try {
-		return jsName in elementInterface.prototype;
+		let success = jsName in elementInterface.prototype;
+		return { success, jsName, elementInterface };
 	}
 	catch (error) {
 		// Unknown properties don't throw errors
-		return {success: true, jsName, elementInterface};
+		return { success: true, jsName, elementInterface };
 	}
 }
