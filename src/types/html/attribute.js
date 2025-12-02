@@ -5,7 +5,7 @@ let elementInterfaces = {};
 /**
  * Irregular cases that can't be determined by `camelCase()`
  */
-let irregularAttributes = {
+export const irregularAttributes = {
 	contenteditable: 'contentEditable',
 	readonly: 'readOnly',
 	for: 'htmlFor',
