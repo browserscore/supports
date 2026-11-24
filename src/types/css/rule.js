@@ -1,5 +1,5 @@
-import { styleElement } from '../../shared.js';
 import { prefixes } from '../../data.js';
+import { styleElement } from '../../shared.js';
 
 let cached = {};
 let instances = {};
@@ -25,16 +25,30 @@ export function isSupported (rule, { parent, contentBefore = '' } = {}) {
 		// Rules that are only valid inside other rules, e.g. @stylistic
 		let parentRule = parent.instance;
 
-		if (parentRule && parentRule.cssRules && (parentRule.insertRule || parentRule.appendRule)) {
-			if (parentRule.insertRule) {
-				// Most rules
-				parentRule.insertRule(code, 0);
-			}
-			else if (parentRule.appendRule) {
-				// E.g. CSSKeyframeRule
-				parentRule.appendRule(code);
-			}
+		let inserted = false;
 
+		if (parentRule && parentRule.cssRules && (parentRule.insertRule || parentRule.appendRule)) {
+			try {
+				if (parentRule.insertRule) {
+					// Most rules
+					parentRule.insertRule(code, 0);
+				}
+				else if (parentRule.appendRule) {
+					// E.g. CSSKeyframeRule
+					parentRule.appendRule(code);
+				}
+
+				inserted = true;
+			}
+			catch (e) {
+				// insertRule() throws a SyntaxError for rules it cannot parse
+				// or HierarchyRequestError if the rule is not allowed here
+				// = not supported, rather than a failure of the test itself
+				return false;
+			}
+		}
+
+		if (inserted) {
 			return parentRule.cssRules[0];
 		}
 		else {
@@ -59,7 +73,6 @@ export function isSupported (rule, { parent, contentBefore = '' } = {}) {
 		styleElement.textContent = code;
 		return styleElement.sheet.cssRules[0];
 	}
-
 }
 
 /**
@@ -67,14 +80,14 @@ export function isSupported (rule, { parent, contentBefore = '' } = {}) {
  * @param {string} rule An @-rule (including any prelude like e.g. "@supports (display: flex)"), a selector, a pseudo-element etc.
  * @returns
  */
-export default function supportsRule (rule, {parent: parentRule, contentBefore} = {}) {
+export default function supportsRule (rule, { parent: parentRule, contentBefore } = {}) {
 	let parent;
 
 	if (parentRule) {
 		// Fail early if parent not supported
 		parent = supportsRule(parentRule);
 		if (!parent.success) {
-			return {success: false, parent: parent};
+			return { success: false, parent: parent };
 		}
 	}
 
@@ -86,7 +99,7 @@ export default function supportsRule (rule, {parent: parentRule, contentBefore} 
 	if (cachedResult === undefined) {
 		for (let p of prefixes) {
 			resolved = prefixRule(rule, p);
-			success = isSupported(resolved, {parent, contentBefore});
+			success = isSupported(resolved, { parent, contentBefore });
 
 			if (success) {
 				if (typeof success === 'object') {
@@ -103,13 +116,13 @@ export default function supportsRule (rule, {parent: parentRule, contentBefore} 
 	}
 	else {
 		success = Boolean(cachedResult);
-		prefix = typeof cachedResult === "boolean" ? '' : cachedResult;
+		prefix = typeof cachedResult === 'boolean' ? '' : cachedResult;
 		resolved = prefixRule(rule, prefix);
 	}
 
 	success ??= false;
 
-	return {success, prefix, instance: instances[rule], resolved: success ? resolved : rule};
+	return { success, prefix, instance: instances[rule], resolved: success ? resolved : rule };
 }
 
 export function prefixRule (rule, prefix = '') {
